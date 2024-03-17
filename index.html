@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pokemon</title>
+</head>
+<body>
+    <h1>Pokemon</h1>
+    <div id="pokemon"></div>
+    <a href="movie.html">Click here to switch to movie page</a>
+    <script>
+
+        //on va chercher dans l'api le pokemon avec son url
+        function fetchPokemon(pokemon) {
+            return fetch('https://pokeapi.co/api/v2/pokemon/' + pokemon)
+            .then((response) => response.json())
+        }
+       async function displayPokemon(pokemon) {
+            const data = await fetchPokemon(pokemon);//on attend la réponse de l'api et on la stock dans la variable data
+            document.querySelector('#pokemon').innerHTML = `
+                <h1>${data.name}</h1>
+                <img src="${data.sprites.front_default}" alt="${data.name}">
+            `
+        }//on fait apparaître l'image du poster et le nom du film
+        displayPokemon('darkrai')
+    </script>
+
+</body>
+</html>
